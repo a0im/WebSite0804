@@ -1,13 +1,109 @@
-.logo{
-    background: blue;
-}
-.nav__sns__links{
-    background-color: blue;
-}
-.header__logo{
-    background: blue;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+:root {
+  --deep-blue-color: #0045ff;
+  --sky-blue-color: #00e2ff;
+  --black-color: #000000;
+  --pink-color: #ff4eff;
+  --light-gray-color: #dfdfdf;
+  --light-green-color: #1cff59;
+  --white-color: #ffffff;
 }
 
-.footer__logo{
-    background: blue;
+body {
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100vw;
+}
+/* nav */
+.nav {
+  display: flex;
+  height: 56px;
+  background: var(--black-color);
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav .nav__logo {
+  width: 155px;
+  margin-right: 20px;
+}
+.nav .nav__categoris {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.nav .nav__categoris div {
+  display: flex;
+  align-items: center;
+}
+.nav .nav__categoris div a {
+  text-decoration: none;
+  color: var(--white-color);
+  padding: 17px 15px 13px 15px;
+  font-weight: 600;
+}
+.categori__menu__wrap {
+  font-size: 30px;
+}
+.categori__link__wrap {
+  font-size: 16px;
+}
+.nav .nav__sns__links {
+  display: flex;
+  margin-left: 10px;
+}
+/* header */
+
+.header {
+  height: calc(20vw + 100px);
+  display: flex;
+}
+.header__logo {
+  width: 50%;
+  background: var(--deep-blue-color);
+  position: relative;
+  padding: 20px;
+}
+.header__logo img {
+  height: 80%;
+  width: auto;
+}
+.header__imgs {
+  width: 50%;
+  background: var(--light-green-color);
+}
+/* none check */
+.header__imgs .img:nth-child(1n + 2) {
+  display: none;
+}
+.img {
+  height: 100%;
+  margin: 10px;
+}
+.img .img__typograpy {
+  position: relative;
+  height: 100%;
+}
+.img .img__typograpy h3 {
+  font-size: calc(2.9vw + 10px) !important;
+  font-weight: 600;
+  width: 100%;
+}
+.img .img__typograpy :nth-child(3) {
+  position: absolute;
+  bottom: 20px;
+}
+.img .img__typograpy :nth-child(3)::after {
+  content: url(https://seoul.designfestival.co.kr/wp-content/uploads/2021/10/main-banner-arrow-black.svg);
+  width: 50px;
+  height: 50px;
+  color: black;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.footer__logo {
+  background: blue;
 }
