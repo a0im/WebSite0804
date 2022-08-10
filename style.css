@@ -318,10 +318,12 @@ body {
 
 .program {
   background: var(--pink-color);
-  height: 40vh;
+  height:80%;
 }
-
-.program .content {
+.program__img__2{
+  background: url(./imgs/orange1080x1454.png) center;
+}
+.program .program__contents .content {
   display: flex;
   border-bottom: 0.1px solid black;
 }
@@ -329,13 +331,13 @@ body {
   color: white;
 }
 
-.program .content h4 {
+.program__contents .content h4 {
   font-size: calc(2.9vw + 10px);
   width: 50%;
   padding: 6px 20px;
   font-weight: 700;
 }
-.program .content .content__description {
+.content .content__description {
   padding: 12px 20px;
   width: 50%;
   font-size: 22px;
@@ -343,7 +345,7 @@ body {
   justify-content: space-between;
   font-weight: 600;
 }
-.program .content .content__description .content__description__num {
+.content .content__description .content__description__num {
   font-weight: 700;
   font-size: calc(2.9vw + 10px);
   display: flex;
