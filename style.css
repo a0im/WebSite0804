@@ -102,7 +102,8 @@ body {
   top: 56px;
   left: 0;
   border-top: #ffffff 2px solid;
-  display: none;
+  /* 🥵 */
+  display: none; 
   justify-content: center;
 }
 .activeNav{
@@ -320,7 +321,19 @@ body {
   background: var(--pink-color);
   height:80%;
 }
+.program__img__1{
+  background: url(./imgs/art0.jpg) center;
+
+}
 .program__img__2{
+  background: url(./imgs/ice.jpg) center;
+
+}
+.program__img__3{
+  background: url(./imgs/poster.jpg) center;
+
+}
+.program__img__4{
   background: url(./imgs/orange1080x1454.png) center;
 }
 .program .program__contents .content {
