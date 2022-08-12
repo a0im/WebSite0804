@@ -1,3 +1,4 @@
+//==================Dom
 const expList = document.querySelectorAll(".exp__list");
 const expInner = document.querySelectorAll(".exps__inner");
 const ctgWrap = document.querySelector(".categori__menu__wrap");
@@ -7,11 +8,10 @@ const program = document.querySelector(".program");
 const programLists = document.querySelectorAll(".content");
 const ctgContain = document.querySelector(".nav__categoris");
 const navWrap = document.querySelector(".nav-wrap");
-const crossBtn = document.querySelector(".categori__btn__icon");
-console.log(ctgContain, navWrap);
-console.log(program);
+const cross = document.querySelector(".fa-solid");
 console.log(programLists);
 
+//==================Nav
 const onNav = (a) => {
   a.target.classList.add("activeOver");
   a.target.nextElementSibling.classList.add("activeNav");
@@ -24,6 +24,49 @@ const closeNav = (a) => {
   });
 };
 
+//950px 이하
+const onResNav = (function (params) {
+  let toggleNav = false;
+  return () => {
+    ctgContain.style.display = toggleNav ? "none" : "flex";
+    toggleNav ? cross.classList.remove("rotate") : cross.classList.add("rotate");
+    toggleNav = !toggleNav;
+    console.log(cross.className);
+  };
+})();
+
+const onResCategori = (tag) => {
+  tag.stopPropagation();
+  let focus = tag.target.className === "exps__inner" ? tag.target : tag.target.parentElement;
+  expInner.forEach((navMenu) => {
+    const CTG = navMenu.nextElementSibling;
+    navMenu.children[1].textContent = "+";
+    if (focus === navMenu) {
+      let bool = CTG.classList.toggle("onCTG");
+      navMenu.children[1].textContent = Boolean(bool) ? "-" : "+";
+    } else {
+      CTG.classList.remove("onCTG");
+    }
+  });
+};
+//==================Program
+
+const pgImgHover = (e) => {
+  for (let i = 0; i < programLists.length; i++) {
+    let index = i + 1;
+    program.classList.remove(`program__img__${index}`);
+    if (e.target === programLists[i]) {
+      program.classList.add(`program__img__${index}`);
+    }
+  }
+};
+
+const pgImgUnHover = (e) => {
+  program.classList.remove(program.className.split(" ")[1]);
+};
+
+//==================Ticker
+
 function runOverTicker(event, type) {
   ticker.addEventListener(event, (e) => {
     const wrap = e.target.children;
@@ -35,23 +78,10 @@ function runOverTicker(event, type) {
 runOverTicker("mouseenter", "paused");
 runOverTicker("mouseleave", "running");
 
-const pgImgHover = (e) => {
-  for (let i = 0; i < programLists.length; i++) {
-    let index = i + 1;
-    program.classList.remove(`program__img__${index}`);
-    if (e.target === programLists[i]) {
-      program.classList.add(`program__img__${index}`);
-      console.log(programLists[i]);
-    }
-  }
-};
-const pgImgUnHover = (e) => {
-  program.classList.remove(program.className.split(" ")[1]);
-};
+/* ================Response */
 
-/* 반응형 */
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 985) {
+const onloadEvnet = (width) => {
+  if (width > 985) {
     expInner.forEach((e) => {
       e.addEventListener("mouseenter", onNav);
       e.addEventListener("mouseleave", closeNav);
@@ -70,37 +100,53 @@ window.addEventListener("resize", () => {
       e.removeEventListener("mouseleave", closeNav);
     });
   }
+
+  if (width < 985) {
+    expInner.forEach((e) => {
+      e.addEventListener("click", onResCategori);
+    });
+    navWrap.addEventListener("click", onResNav);
+  } else {
+    expInner.forEach((e) => {
+      e.removeEventListener("click", onResCategori);
+    });
+    navWrap.removeEventListener("click", onResNav);
+    console.log(Boolean());
+  }
+};
+
+onloadEvnet(window.innerWidth);
+window.addEventListener("resize", () => {
+  onloadEvnet(window.innerWidth);
 });
 
-expInner.forEach((e) => {
-  e.addEventListener("click", (tag) => {
-    tag.stopPropagation();
-    let focus = tag.target.className === "exps__inner" ? tag.target : tag.target.parentElement;
-    focus.nextElementSibling.style.display = "flex";
-
-    for (let i = 0; i < expInner.length; i++) {
-      if (focus === expInner[i]) {
-        console.log(expInner[i]);
-      }
-    }
-  });
-});
-
-console.log(expInner.values);
-let tnf = false;
-navWrap.addEventListener("click", () => {
-  ctgContain.style.display = tnf ? "none" : "flex";
-  tnf = !tnf;
-});
-
-/* 몰랐던거 
+/* 알게된것 
 1. window.addEventListener("resize", () => {
   if (window.innerWidth > 985) 화면너비값 실시간으로 가져오기
   
-
 2.  removeEventListener사용방법
+    preventDefault도 사용방법 이벤트 적용한 함수를 콜백함수 값으로 적용해야함
   
 3. 이벤트 버블링 차단 stopPropagation() 메서드 
+
+4. resize + window.innerWidth 처럼 동작이 있을때 실행되는 이벤트를 
+로드될때 한번은 실행 시켜야한다면 함수로 조건식을 전역으로 빼오고
+전역에 한번 호출하고 resize에도 호출식을 넣어두면 로드될때도 한번 호출이됨
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   */
 
 // ctgs.forEach((d1v) => {

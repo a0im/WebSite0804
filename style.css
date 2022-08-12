@@ -66,6 +66,11 @@ body {
   transform: rotate(45deg);
   text-align: center;
 }
+.rotate{
+  transform: rotate(90deg) !important;
+}
+
+
 .nav__categoris {
   width: 100%;
   display: flex;
@@ -106,10 +111,13 @@ body {
   display: none; 
   justify-content: center;
 }
+
 .activeNav{
   display: flex !important;
 }
-
+.onCTG{
+  display: flex !important;
+}
 .res__contain .categori__menu__wrap .categori a,
 .categori__link__wrap .categori,
 .exp__list a {
@@ -463,9 +471,7 @@ body {
 }
 
 /* =========================test */
-.fa-solid:hover {
-  transform: rotate(90deg);
-}
+
 
 /* ===================================================================== */
 @media screen and (max-width: 1300px) {
