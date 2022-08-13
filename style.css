@@ -44,9 +44,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 .nav .nav-wrap .nav__logo {
   height: 100%;
+  background: black;
 }
 .nav .nav-wrap .nav__logo img {
   padding-left: 20px;
@@ -66,10 +68,9 @@ body {
   transform: rotate(45deg);
   text-align: center;
 }
-.rotate{
+.rotate {
   transform: rotate(90deg) !important;
 }
-
 
 .nav__categoris {
   width: 100%;
@@ -89,6 +90,7 @@ body {
   font-size: 30px;
 }
 .categori__menu__wrap .categori {
+  /* 🤑 */
   width: 100%;
 }
 
@@ -100,31 +102,38 @@ body {
   align-items: center;
   cursor: pointer;
 }
+
 .categori__menu__wrap .categori .exp__list {
+  height: 100%;
   width: 100%;
   background: black;
   position: absolute;
   top: 56px;
   left: 0;
   border-top: #ffffff 2px solid;
-  /* 🥵 */
-  display: none; 
+  display: none;
   justify-content: center;
 }
-
-.activeNav{
+.categori__menu__wrap .categori .exp__list  .exp__list__content{
+  display: flex;
+}
+.activeNav {
   display: flex !important;
 }
-.onCTG{
+.onCTG {
   display: flex !important;
 }
 .res__contain .categori__menu__wrap .categori a,
 .categori__link__wrap .categori,
-.exp__list a {
+.exp__list .exp__list__content a {
   text-decoration: none;
   color: var(--white-color);
   font-weight: 600;
   padding: 17px 15px 13px 15px;
+}
+
+.exp__list .exp__list__content a{
+  white-space: nowrap;
 }
 
 .categori__btn__icon {
@@ -137,23 +146,22 @@ body {
   font-size: 16px;
 }
 
-
-.categori__menu__wrap .categori:nth-child(1) .activeOver a{
+.categori__menu__wrap .categori:nth-child(1) .activeOver a {
   color: #f5ca00;
 }
-.categori__menu__wrap .categori:nth-child(2) .activeOver a{
+.categori__menu__wrap .categori:nth-child(2) .activeOver a {
   color: var(--light-green-color);
 }
-.categori__menu__wrap .categori:nth-child(3) .activeOver a{
+.categori__menu__wrap .categori:nth-child(3) .activeOver a {
   color: var(--sky-blue-color);
 }
-.categori__menu__wrap .categori:nth-child(4) .activeOver a{
+.categori__menu__wrap .categori:nth-child(4) .activeOver a {
   color: var(--pink-color);
 }
-.categori__menu__wrap .categori:nth-child(5) .activeOver a{
+.categori__menu__wrap .categori:nth-child(5) .activeOver a {
   color: var(--deep-blue-color);
 }
-.categori__menu__wrap .categori:nth-child(6) .activeOver a{
+.categori__menu__wrap .categori:nth-child(6) .activeOver a {
   color: orangered;
 }
 
@@ -161,29 +169,32 @@ body {
   font-size: 22px;
 }
 
-.categori__menu__wrap .categori:nth-child(1) .exp__list a {
+.categori__menu__wrap .categori:nth-child(1) .exp__list .exp__list__content a {
   color: yellow;
 }
-.categori__menu__wrap .categori:nth-child(2) .exp__list a {
+.categori__menu__wrap .categori:nth-child(2) .exp__list .exp__list__content a {
   color: var(--light-green-color);
 }
-.categori__menu__wrap .categori:nth-child(3) .exp__list a {
+.categori__menu__wrap .categori:nth-child(3) .exp__list .exp__list__content a {
   color: var(--sky-blue-color);
 }
-.categori__menu__wrap .categori:nth-child(4) .exp__list a {
+.categori__menu__wrap .categori:nth-child(4) .exp__list .exp__list__content a {
   color: var(--pink-color);
 }
-.categori__menu__wrap .categori:nth-child(5) .exp__list a {
+.categori__menu__wrap .categori:nth-child(5) .exp__list .exp__list__content a {
   color: var(--deep-blue-color);
 }
-.categori__menu__wrap .categori:nth-child(6) .exp__list a {
+.categori__menu__wrap .categori:nth-child(6) .exp__list .exp__list__content a {
   color: orangered;
 }
 
-.nav .nav__sns__links {
+.nav .nav-wrap .nav__sns__links {
   display: flex;
   margin-left: 10px;
   padding-right: 20px;
+  background: black;
+  height: 100%;
+  align-items: center;
 }
 /* header */
 .header {
@@ -201,6 +212,7 @@ body {
   height: auto;
   max-width: 100%;
 }
+/* 🤬 */
 .header__imgs {
   position: relative;
   width: 50%;
@@ -259,7 +271,6 @@ body {
   background: var(--white-color);
 }
 
-/* 😡 */
 /* tiker */
 .ticker {
   height: 54px;
@@ -277,7 +288,6 @@ body {
 .ticker .ticker__wrap:nth-child(2) {
   animation: tickerX2 40s linear infinite;
   animation-delay: -20s;
-
 }
 
 /* 여기 js로 둘다 실행되도록 구현해야함 
@@ -285,7 +295,7 @@ body {
 .ticker .ticker__wrap:nth-child(2):hover{
   animation-play-state : paused;
   animation-play-state :running
-} */ 
+} */
 
 @keyframes tickerX1 {
   0% {
@@ -327,21 +337,18 @@ body {
 
 .program {
   background: var(--pink-color);
-  height:80%;
+  height: 80%;
 }
-.program__img__1{
+.program__img__1 {
   background: url(./imgs/art0.jpg) center;
-
 }
-.program__img__2{
+.program__img__2 {
   background: url(./imgs/ice.jpg) center;
-
 }
-.program__img__3{
+.program__img__3 {
   background: url(./imgs/poster.jpg) center;
-
 }
-.program__img__4{
+.program__img__4 {
   background: url(./imgs/orange1080x1454.png) center;
 }
 .program .program__contents .content {
@@ -472,7 +479,6 @@ body {
 
 /* =========================test */
 
-
 /* ===================================================================== */
 @media screen and (max-width: 1300px) {
   .categori__menu__wrap {
@@ -489,16 +495,21 @@ body {
 @media screen and (max-width: 985px) {
   /* nav */
   .nav__categoris {
-    /* 🥵 */
-    display: none;
+    /* 🤢 */
+    display: flex;
     flex-direction: column;
     background: black;
     position: absolute;
     left: 0;
-    top: 56px;
     width: 100%;
-    height: calc(20vw + 104px);
-    z-index: 11;
+    z-index: -2;
+    top: calc(-20vw + -160px);
+    transition: top 300ms ease;
+  }
+
+  .on__res__nav{
+    display: flex !important;
+    top: 56px !important;
   }
 
   .categori__menu__wrap .categori .exps__inner,
@@ -534,21 +545,44 @@ body {
     font-size: 18px;
     width: 100%;
   }
+
   .categori__menu__wrap .categori .exp__list {
     /* display: none; */
     width: 100%;
+
     background: var(--dark-gray-color);
     position: relative;
     top: 0;
     left: 0;
     border-top: none;
-    flex-direction: column;
+    /* 🥵 */
+    /* transform: translateY(-100%); */
+    z-index: 1;
+    overflow: hidden;
+    /* transition: top 5s ease; */
   }
-  .categori__menu__wrap .categori .exp__list a {
+  .exp__list__content{
     width: 100%;
+    flex-direction: column;
+    position: relative;
+  }
+  .translate{
+    animation: pop 300ms ease;
+  }
+  @keyframes pop {
+    0%{
+      transform: translateY(-100%)
+    }
+    100%{
+      transform: translateY(0%)
+    }
+  }
+
+  .categori__menu__wrap .categori .exp__list .exp__list__content a {
     line-height: 40px;
     height: 40px;
     padding: 0 16px 0 32px !important;
+    
     color: white !important;
     font-size: 20px;
   }

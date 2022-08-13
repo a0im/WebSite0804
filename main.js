@@ -1,17 +1,19 @@
 //==================Dom
-const expList = document.querySelectorAll(".exp__list");
+const navWrap = document.querySelector(".nav-wrap");
+const ctgContain = document.querySelector(".nav__categoris");
+const cross = document.querySelector(".fa-solid");
 const expInner = document.querySelectorAll(".exps__inner");
+const expLists = document.querySelectorAll(".exp__list");
+const expListContent = document.querySelectorAll(".exp__list__content");
 const ctgWrap = document.querySelector(".categori__menu__wrap");
 const ticker = document.querySelector(".ticker");
 const tickerWrap = document.querySelector(".tickerWrap");
 const program = document.querySelector(".program");
 const programLists = document.querySelectorAll(".content");
-const ctgContain = document.querySelector(".nav__categoris");
-const navWrap = document.querySelector(".nav-wrap");
-const cross = document.querySelector(".fa-solid");
 console.log(programLists);
 
 //==================Nav
+
 const onNav = (a) => {
   a.target.classList.add("activeOver");
   a.target.nextElementSibling.classList.add("activeNav");
@@ -25,30 +27,70 @@ const closeNav = (a) => {
 };
 
 //950px 이하
-const onResNav = (function (params) {
+function closedCTG(ctgList) {
+  ctgList.nextElementSibling.classList.remove("onCTG");
+  ctgList.children[1].textContent = "+";
+}
+
+const onResNav = (function () {
   let toggleNav = false;
   return () => {
-    ctgContain.style.display = toggleNav ? "none" : "flex";
-    toggleNav ? cross.classList.remove("rotate") : cross.classList.add("rotate");
+    if (toggleNav) {
+      cross.classList.remove("rotate");
+      ctgContain.classList.remove("on__res__nav");
+      expInner.forEach((ctg) => closedCTG(ctg));
+    } else {
+      cross.classList.add("rotate");
+      ctgContain.classList.add("on__res__nav");
+    }
     toggleNav = !toggleNav;
-    console.log(cross.className);
   };
 })();
 
 const onResCategori = (tag) => {
   tag.stopPropagation();
   let focus = tag.target.className === "exps__inner" ? tag.target : tag.target.parentElement;
-  expInner.forEach((navMenu) => {
-    const CTG = navMenu.nextElementSibling;
-    navMenu.children[1].textContent = "+";
-    if (focus === navMenu) {
-      let bool = CTG.classList.toggle("onCTG");
-      navMenu.children[1].textContent = Boolean(bool) ? "-" : "+";
+  console.log(focus);
+  expInner.forEach((ctg) => {
+    const expList = ctg.nextElementSibling;
+    if (focus === ctg) {
+      let bool = expList.classList.toggle("onCTG");
+      ctg.children[1].textContent = Boolean(bool) ? "-" : "+";
+      // expLists.forEach(ctgc => {
+      //   // console.log(ctgc.className,expLists.className);
+      //   if (Boolean(bool) && ctgc.className === expList.className) {
+      //     let result = ctgc.children.className
+      //     // .classList.add('translate')
+      //     console.log(result);
+      //   }
+
+      // });
+      // expListContent
+      // Boolean(bool)?ctgCt.add('translate'):ctgCt.remove('translate')
+      // expListContent.forEach((e)=>{
+      //   console.log(expList , ctgCt);
+      //   if (e === ctgCt) {
+      //     console.log("t", e);
+
+      //   }
+      // })
+      // Boolean(bool) ? console.log("t") : console.log("f");
+      // console.log(ctgCt.className, "---", ctgCt);
     } else {
-      CTG.classList.remove("onCTG");
+      closedCTG(ctg);
     }
   });
+
+  for (let i = 0; i < expInner.length; i++) {
+    if (expInner[i] === focus) {
+      expListContent[i].classList.add("translate");
+      console.log(expListContent[i]);
+    } else {
+      expListContent[i].classList.remove("translate");
+    }
+  }
 };
+
 //==================Program
 
 const pgImgHover = (e) => {
@@ -111,7 +153,6 @@ const onloadEvnet = (width) => {
       e.removeEventListener("click", onResCategori);
     });
     navWrap.removeEventListener("click", onResNav);
-    console.log(Boolean());
   }
 };
 
@@ -120,7 +161,7 @@ window.addEventListener("resize", () => {
   onloadEvnet(window.innerWidth);
 });
 
-/* 알게된것 
+/* -------------------------알게된것 
 1. window.addEventListener("resize", () => {
   if (window.innerWidth > 985) 화면너비값 실시간으로 가져오기
   
@@ -132,6 +173,17 @@ window.addEventListener("resize", () => {
 4. resize + window.innerWidth 처럼 동작이 있을때 실행되는 이벤트를 
 로드될때 한번은 실행 시켜야한다면 함수로 조건식을 전역으로 빼오고
 전역에 한번 호출하고 resize에도 호출식을 넣어두면 로드될때도 한번 호출이됨
+
+5.Boolean 메서드 조건문에 활용 
+
+6. 돔을 안부르고 부모돔의 childen메서드 등을 이용해서 handling 하는 경우 문제가
+자주 발생하는데 , 이런경우랑 1대1 대치가 되는 다른테그안의 요소를 사용 해야하는경우
+for문에 i값을 이용해서 handling 하자 forEach를 쓰게되면 접근이랑 오류도 자주나게된다 .
+
+-------------------------해결못한점
+exp__list__content 에서 position top 변동에 따른 
+transistion 이 작동을 안했음 
+그냥 animation으로 처리함 . 
 
 
 
