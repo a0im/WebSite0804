@@ -3,6 +3,7 @@ const navWrap = document.querySelector(".nav-wrap");
 const ctgContain = document.querySelector(".nav__categoris");
 const cross = document.querySelector(".fa-solid");
 const expInner = document.querySelectorAll(".exps__inner");
+const categori = document.querySelectorAll(".categori");
 const expLists = document.querySelectorAll(".exp__list");
 const expListContent = document.querySelectorAll(".exp__list__content");
 const ctgWrap = document.querySelector(".categori__menu__wrap");
@@ -10,23 +11,46 @@ const ticker = document.querySelector(".ticker");
 const tickerWrap = document.querySelector(".tickerWrap");
 const program = document.querySelector(".program");
 const programLists = document.querySelectorAll(".content");
-console.log(programLists);
+const subscribeBox = document.querySelector(".newsletter__btn__wrap");
+const arrow = document.querySelector(".newsletter__arrow");
+const subscribe = document.querySelector(".btn");
+console.log(arrow);
 
 //==================Nav
 
 const onNav = (a) => {
-  a.target.classList.add("activeOver");
-  a.target.nextElementSibling.classList.add("activeNav");
+  for (let i = 0; i < categori.length; i++) {
+    if (a.target === categori[i]) {
+      expInner[i].classList.add("activeOver");
+      expInner[i].nextElementSibling.classList.add("activeNav");
+    }
+  }
 };
 
 const closeNav = (a) => {
-  expInner.forEach((del) => {
-    del.classList.remove("activeOver");
-    a.target.nextElementSibling.classList.remove("activeNav");
-  });
+  for (let i = 0; i < categori.length; i++) {
+    if (a.target === categori[i]) {
+      expInner[i].classList.remove("activeOver");
+      expInner[i].nextElementSibling.classList.remove("activeNav");
+    }
+  }
 };
 
 //950px 이하
+
+function resetNav() {
+  let mainNav = ctgContain.classList;
+  expLists.forEach((expList) => {
+    let list = expList.classList;
+    if (mainNav.contains("on__res__nav") || list.contains("onCTG")) {
+      mainNav.remove("on__res__nav");
+      list.remove("onCTG");
+      return;
+    }
+  });
+  return;
+}
+
 function closedCTG(ctgList) {
   ctgList.nextElementSibling.classList.remove("onCTG");
   ctgList.children[1].textContent = "+";
@@ -49,33 +73,13 @@ const onResNav = (function () {
 
 const onResCategori = (tag) => {
   tag.stopPropagation();
-  let focus = tag.target.className === "exps__inner" ? tag.target : tag.target.parentElement;
+  let focus = tag.target.classList.contains("exps__inner") ? tag.target : tag.target.parentElement;
   console.log(focus);
   expInner.forEach((ctg) => {
     const expList = ctg.nextElementSibling;
     if (focus === ctg) {
       let bool = expList.classList.toggle("onCTG");
       ctg.children[1].textContent = Boolean(bool) ? "-" : "+";
-      // expLists.forEach(ctgc => {
-      //   // console.log(ctgc.className,expLists.className);
-      //   if (Boolean(bool) && ctgc.className === expList.className) {
-      //     let result = ctgc.children.className
-      //     // .classList.add('translate')
-      //     console.log(result);
-      //   }
-
-      // });
-      // expListContent
-      // Boolean(bool)?ctgCt.add('translate'):ctgCt.remove('translate')
-      // expListContent.forEach((e)=>{
-      //   console.log(expList , ctgCt);
-      //   if (e === ctgCt) {
-      //     console.log("t", e);
-
-      //   }
-      // })
-      // Boolean(bool) ? console.log("t") : console.log("f");
-      // console.log(ctgCt.className, "---", ctgCt);
     } else {
       closedCTG(ctg);
     }
@@ -104,7 +108,7 @@ const pgImgHover = (e) => {
 };
 
 const pgImgUnHover = (e) => {
-  program.classList.remove(program.className.split(" ")[1]);
+  program.classList.remove(program.classList.item(1));
 };
 
 //==================Ticker
@@ -120,11 +124,27 @@ function runOverTicker(event, type) {
 runOverTicker("mouseenter", "paused");
 runOverTicker("mouseleave", "running");
 
+//==================NewsLetter
+
+const onSubscribe = () => {
+  arrow.classList.add("on__arrow");
+  writeSub(arrow);
+};
+
+const doneSubscribe = () => {
+  arrow.classList.remove("on__arrow");
+  writeSub(arrow);
+};
+
+function writeSub(aw) {
+  let sbStyle = subscribe.style;
+  aw.classList.contains("on__arrow") ? (sbStyle.color = "transParent") : (sbStyle.color = "black");
+}
 /* ================Response */
 
 const onloadEvnet = (width) => {
   if (width > 985) {
-    expInner.forEach((e) => {
+    categori.forEach((e) => {
       e.addEventListener("mouseenter", onNav);
       e.addEventListener("mouseleave", closeNav);
     });
@@ -132,12 +152,15 @@ const onloadEvnet = (width) => {
       e.addEventListener("mouseenter", pgImgHover);
       e.addEventListener("mouseleave", pgImgUnHover);
     });
+    subscribeBox.addEventListener("mouseenter", onSubscribe);
+    subscribeBox.addEventListener("mouseleave", doneSubscribe);
   } else {
     programLists.forEach((e) => {
       e.removeEventListener("mouseenter", pgImgHover);
       e.removeEventListener("mouseleave", pgImgUnHover);
     });
-    expInner.forEach((e) => {
+
+    categori.forEach((e) => {
       e.removeEventListener("mouseenter", onNav);
       e.removeEventListener("mouseleave", closeNav);
     });
@@ -149,6 +172,8 @@ const onloadEvnet = (width) => {
     });
     navWrap.addEventListener("click", onResNav);
   } else {
+    resetNav();
+
     expInner.forEach((e) => {
       e.removeEventListener("click", onResCategori);
     });
@@ -168,7 +193,7 @@ window.addEventListener("resize", () => {
 2.  removeEventListener사용방법
     preventDefault도 사용방법 이벤트 적용한 함수를 콜백함수 값으로 적용해야함
   
-3. 이벤트 버블링 차단 stopPropagation() 메서드 
+3. 이벤트 버블링 막는 stopPropagation() 메서드 
 
 4. resize + window.innerWidth 처럼 동작이 있을때 실행되는 이벤트를 
 로드될때 한번은 실행 시켜야한다면 함수로 조건식을 전역으로 빼오고
@@ -179,6 +204,11 @@ window.addEventListener("resize", () => {
 6. 돔을 안부르고 부모돔의 childen메서드 등을 이용해서 handling 하는 경우 문제가
 자주 발생하는데 , 이런경우랑 1대1 대치가 되는 다른테그안의 요소를 사용 해야하는경우
 for문에 i값을 이용해서 handling 하자 forEach를 쓰게되면 접근이랑 오류도 자주나게된다 .
+
+7. class 값을 boolean으로 받고 싶으면 classlist 메서드 
+contains("on__res__nav")  사용할것
+ item(index) <- 인덱스로 접근하고 싶으면
+className.splite() 이런거 하지마 
 
 -------------------------해결못한점
 exp__list__content 에서 position top 변동에 따른 

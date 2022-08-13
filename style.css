@@ -90,11 +90,10 @@ body {
   font-size: 30px;
 }
 .categori__menu__wrap .categori {
-  /* 🤑 */
   width: 100%;
 }
 
-/* 🤑 */
+
 .categori__menu__wrap .categori .exps__inner {
   width: 100%;
   display: flex;
@@ -114,7 +113,7 @@ body {
   display: none;
   justify-content: center;
 }
-.categori__menu__wrap .categori .exp__list  .exp__list__content{
+.categori__menu__wrap .categori .exp__list .exp__list__content {
   display: flex;
 }
 .activeNav {
@@ -124,7 +123,7 @@ body {
   display: flex !important;
 }
 .res__contain .categori__menu__wrap .categori a,
-.categori__link__wrap .categori,
+.categori__link__wrap .login_langgue,
 .exp__list .exp__list__content a {
   text-decoration: none;
   color: var(--white-color);
@@ -132,7 +131,7 @@ body {
   padding: 17px 15px 13px 15px;
 }
 
-.exp__list .exp__list__content a{
+.exp__list .exp__list__content a {
   white-space: nowrap;
 }
 
@@ -380,6 +379,8 @@ body {
   align-items: flex-end;
 }
 
+
+
 .newsletter {
   height: 71px;
   border-top: #000000 solid 0.1px;
@@ -400,7 +401,7 @@ body {
 
 .newsletter label,
 .newsletter a,
-.newsletter .btn {
+.newsletter .newsletter__btn__wrap .btn {
   font-size: 50px;
   font-weight: 700;
   text-decoration: none;
@@ -411,12 +412,32 @@ body {
   margin-right: 20px;
 }
 
-.newsletter .btn {
+/* 😡 */
+.newsletter .newsletter__btn__wrap{
+  position: relative;
   height: 50px;
+}
+.newsletter .newsletter__btn__wrap .btn {
   border: none;
   background: transparent;
-}
+  display: block;
+  cursor: pointer;
 
+}
+.newsletter__arrow{
+  line-height: 50px;
+  position: absolute;
+  transform: translate(-50%);
+  top:0;
+  left: 25%;
+  color: transparent;
+  font-size: 60px;
+  transition: left 200ms ease-out;
+}
+.on__arrow{
+  left: 50% !important;
+  color: black;
+}
 .newsletter .email {
   height: 50px;
   border: none;
@@ -430,6 +451,13 @@ body {
 .newsletter .email::placeholder {
   color: white;
 }
+/* .newsletter__text__contain{
+  height: 100%;
+}
+.newsletter__text__contain a{
+  line-height: 50px;
+} */
+
 /* footer */
 .footer {
   padding: 20px;
@@ -507,7 +535,7 @@ body {
     transition: top 300ms ease;
   }
 
-  .on__res__nav{
+  .on__res__nav {
     display: flex !important;
     top: 56px !important;
   }
@@ -528,13 +556,13 @@ body {
     justify-content: flex-start;
   }
   .categori__menu__wrap .categori a,
-  .categori__link__wrap .categori {
+  .categori__link__wrap .login_langgue {
     padding: 0 !important;
   }
   .categori__menu__wrap .categori {
     line-height: 1.7;
   }
-  .categori__link__wrap .categori {
+  .categori__link__wrap .login_langgue {
     line-height: 1.7;
     margin-top: 30px;
     margin-bottom: 5px;
@@ -555,26 +583,23 @@ body {
     top: 0;
     left: 0;
     border-top: none;
-    /* 🥵 */
-    /* transform: translateY(-100%); */
     z-index: 1;
     overflow: hidden;
-    /* transition: top 5s ease; */
   }
-  .exp__list__content{
+  .exp__list__content {
     width: 100%;
     flex-direction: column;
     position: relative;
   }
-  .translate{
+  .translate {
     animation: pop 300ms ease;
   }
   @keyframes pop {
-    0%{
-      transform: translateY(-100%)
+    0% {
+      transform: translateY(-100%);
     }
-    100%{
-      transform: translateY(0%)
+    100% {
+      transform: translateY(0%);
     }
   }
 
@@ -582,7 +607,7 @@ body {
     line-height: 40px;
     height: 40px;
     padding: 0 16px 0 32px !important;
-    
+
     color: white !important;
     font-size: 20px;
   }
@@ -640,14 +665,17 @@ body {
     height: 40px;
     padding: 6px 10px;
   }
-  .newsletter .btn {
+  .newsletter .newsletter__btn__wrap{
+    height: 23px;
+  }
+  .newsletter .newsletter__btn__wrap .btn {
     position: absolute;
     right: 15px;
-    height: 23px;
     font-size: 21px;
     border: none;
     background: transparent;
     z-index: 10;
+    line-height: 1;
   }
   .newsletter label,
   .newsletter a {
