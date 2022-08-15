@@ -93,7 +93,6 @@ body {
   width: 100%;
 }
 
-
 .categori__menu__wrap .categori .exps__inner {
   width: 100%;
   display: flex;
@@ -213,40 +212,90 @@ body {
 }
 /* 🤬 */
 .header__imgs {
+  transition: background 500ms ease;
+  /* overflow: hidden; */
   position: relative;
   width: 50%;
+}
+
+.bg1 {
   background: var(--light-green-color);
 }
-/* none check */
-.header__imgs .img:nth-child(1n + 2) {
+.bg2 {
+  background: var(--sky-blue-color);
+}
+.bg3 {
+  background: url(./imgs/header_bg_3.png) center;
+  background-size: 100%;
+}
+.bg4 {
+  background: url(./imgs/header_bg_4.png) center;
+  background-size: 100%;
+}
+.flex {
+  display: flex !important;
+}
+/* nonecheck */
+.header__imgs .img {
+  width: 100%;
   display: none;
 }
+
+/* .header__imgs .img:nth-child(1) {
+  display: flex;
+} */
+.header__imgs .img:nth-child(1n + 3) {
+  color: white !important;
+}
+
 .img {
   height: 100%;
-  margin: 10px;
+  display: inline-block;
 }
 .img .img__typograpy {
+  padding: 10px;
+  background: transparent;
   height: 100%;
-  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.img .img__typograpy .hd__content__wrap:last-child::after {
+  content: "";
+  background: url(https://seoul.designfestival.co.kr/wp-content/uploads/2021/10/main-banner-arrow-black.svg) no-repeat;
+  background-size: 100% 100%;
+  width: calc(1vw + 30px);
+  height: calc(1vw + 30px);
+
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.img .img__typograpy .hd__content__wrap:last-child {
+  /* position: absolute;
+  bottom: 20px; */
 }
 .img .img__typograpy h3 {
   font-size: calc(2.9vw + 10px);
   font-weight: 600;
   width: 100%;
 }
-.img .img__typograpy :nth-child(3) {
-  position: absolute;
-  bottom: 20px;
+.hd__content__wrap {
+  overflow: hidden;
+  /* position: relative; */
 }
-.img .img__typograpy :nth-child(3)::after {
-  content: url(https://seoul.designfestival.co.kr/wp-content/uploads/2021/10/main-banner-arrow-black.svg);
-  width: 50px;
-  height: auto;
-  color: black;
-  position: absolute;
-  right: 20px;
-  bottom: 0px;
+
+.hd__content__wrap > * {
+  transition: all 300ms ease;
+  position: relative;
+  top: 80px;
 }
+
+.ontext > * {
+  top: 0px !important;
+}
+
 .header__selectImgBtns {
   position: absolute;
   top: 15px;
@@ -379,8 +428,6 @@ body {
   align-items: flex-end;
 }
 
-
-
 .newsletter {
   height: 71px;
   border-top: #000000 solid 0.1px;
@@ -412,8 +459,7 @@ body {
   margin-right: 20px;
 }
 
-/* 😡 */
-.newsletter .newsletter__btn__wrap{
+.newsletter .newsletter__btn__wrap {
   position: relative;
   height: 50px;
 }
@@ -422,19 +468,18 @@ body {
   background: transparent;
   display: block;
   cursor: pointer;
-
 }
-.newsletter__arrow{
+.newsletter__arrow {
   line-height: 50px;
   position: absolute;
   transform: translate(-50%);
-  top:0;
+  top: 0;
   left: 25%;
   color: transparent;
   font-size: 60px;
   transition: left 200ms ease-out;
 }
-.on__arrow{
+.on__arrow {
   left: 50% !important;
   color: black;
 }
@@ -451,12 +496,6 @@ body {
 .newsletter .email::placeholder {
   color: white;
 }
-/* .newsletter__text__contain{
-  height: 100%;
-}
-.newsletter__text__contain a{
-  line-height: 50px;
-} */
 
 /* footer */
 .footer {
@@ -523,7 +562,6 @@ body {
 @media screen and (max-width: 985px) {
   /* nav */
   .nav__categoris {
-    /* 🤢 */
     display: flex;
     flex-direction: column;
     background: black;
@@ -665,7 +703,7 @@ body {
     height: 40px;
     padding: 6px 10px;
   }
-  .newsletter .newsletter__btn__wrap{
+  .newsletter .newsletter__btn__wrap {
     height: 23px;
   }
   .newsletter .newsletter__btn__wrap .btn {
@@ -676,6 +714,9 @@ body {
     background: transparent;
     z-index: 10;
     line-height: 1;
+  }
+  .newsletter__arrow {
+    display: none;
   }
   .newsletter label,
   .newsletter a {
@@ -709,7 +750,7 @@ body {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .header {
     flex-direction: column;
   }

@@ -14,7 +14,49 @@ const programLists = document.querySelectorAll(".content");
 const subscribeBox = document.querySelector(".newsletter__btn__wrap");
 const arrow = document.querySelector(".newsletter__arrow");
 const subscribe = document.querySelector(".btn");
-console.log(arrow);
+const headerImgcContain = document.querySelector(".header__imgs");
+const headerTxtWrap = document.querySelectorAll(".img");
+const typograpy = document.querySelectorAll(".img__typograpy");
+const typograpyWrap = document.querySelectorAll(".hd__content__wrap");
+
+
+headerChangeImg = (() => {
+  const [...arr] = headerTxtWrap;
+  let i = 0;
+
+  function selectImg() {
+    if (i >= arr.length) {
+      i = 0;
+    }
+    const delClass = headerImgcContain.classList.item(1);
+    headerImgcContain.classList.remove(delClass);
+    headerImgcContain.classList.add(`bg${i + Number(1)}`);
+    console.log(headerImgcContain.classList.item(1));
+
+    moveTxt()
+    i++;
+  }
+
+
+  function moveTxt() {
+    headerTxtWrap.forEach(e=>e.classList.remove('flex'))
+    headerTxtWrap[i].classList.add('flex')
+
+    typograpyWrap.forEach((target)=>{
+      target.classList.remove('ontext')
+      if (typograpy[i] === target.parentElement) {
+        setTimeout(()=>{
+          target.classList.add('ontext');
+        },200)
+        console.log(target.className);
+      }
+    })
+
+  }
+  setInterval(() => {
+    selectImg();
+  }, 4000);
+})();
 
 //==================Nav
 
@@ -36,8 +78,7 @@ const closeNav = (a) => {
   }
 };
 
-//950px 이하
-
+//950px 반응형
 function resetNav() {
   let mainNav = ctgContain.classList;
   expLists.forEach((expList) => {
@@ -48,6 +89,7 @@ function resetNav() {
       return;
     }
   });
+
   return;
 }
 
@@ -95,6 +137,21 @@ const onResCategori = (tag) => {
   }
 };
 
+//==================header
+
+//==================Ticker
+
+function runOverTicker(event, type) {
+  ticker.addEventListener(event, (e) => {
+    const wrap = e.target.children;
+    for (let i = 0; i < wrap.length; i++) {
+      wrap[i].style.animationPlayState = type;
+    }
+  });
+}
+runOverTicker("mouseenter", "paused");
+runOverTicker("mouseleave", "running");
+
 //==================Program
 
 const pgImgHover = (e) => {
@@ -110,20 +167,6 @@ const pgImgHover = (e) => {
 const pgImgUnHover = (e) => {
   program.classList.remove(program.classList.item(1));
 };
-
-//==================Ticker
-
-function runOverTicker(event, type) {
-  ticker.addEventListener(event, (e) => {
-    const wrap = e.target.children;
-    for (let i = 0; i < wrap.length; i++) {
-      wrap[i].style.animationPlayState = type;
-    }
-  });
-}
-runOverTicker("mouseenter", "paused");
-runOverTicker("mouseleave", "running");
-
 //==================NewsLetter
 
 const onSubscribe = () => {
@@ -188,8 +231,8 @@ window.addEventListener("resize", () => {
 
 /* -------------------------알게된것 
 1. window.addEventListener("resize", () => {
-  if (window.innerWidth > 985) 화면너비값 실시간으로 가져오기
-  
+  if (window.innerWidth > 985) 화면너비값( 실시간으로 가져오기
+  )
 2.  removeEventListener사용방법
     preventDefault도 사용방법 이벤트 적용한 함수를 콜백함수 값으로 적용해야함
   
@@ -229,6 +272,8 @@ transistion 이 작동을 안했음
 
 
 
+
+
   */
 
 // ctgs.forEach((d1v) => {
@@ -247,7 +292,7 @@ transistion 이 작동을 안했음
 //       }
 //     });
 //   });
-// });
+// });`
 
 // function addEvent(dom, event) {
 //   dom.addEventListener(event, (e) => {
@@ -259,6 +304,6 @@ transistion 이 작동을 안했음
 //         e.classList.remove("activeOver");
 //       });
 //     });
-//   });
+// `  });
 // }
 // addEvent(ctgWrap, "mouseleave");
