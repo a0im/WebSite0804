@@ -18,45 +18,8 @@ const headerImgcContain = document.querySelector(".header__imgs");
 const headerTxtWrap = document.querySelectorAll(".img");
 const typograpy = document.querySelectorAll(".img__typograpy");
 const typograpyWrap = document.querySelectorAll(".hd__content__wrap");
-
-
-headerChangeImg = (() => {
-  const [...arr] = headerTxtWrap;
-  let i = 0;
-
-  function selectImg() {
-    if (i >= arr.length) {
-      i = 0;
-    }
-    const delClass = headerImgcContain.classList.item(1);
-    headerImgcContain.classList.remove(delClass);
-    headerImgcContain.classList.add(`bg${i + Number(1)}`);
-    console.log(headerImgcContain.classList.item(1));
-
-    moveTxt()
-    i++;
-  }
-
-
-  function moveTxt() {
-    headerTxtWrap.forEach(e=>e.classList.remove('flex'))
-    headerTxtWrap[i].classList.add('flex')
-
-    typograpyWrap.forEach((target)=>{
-      target.classList.remove('ontext')
-      if (typograpy[i] === target.parentElement) {
-        setTimeout(()=>{
-          target.classList.add('ontext');
-        },200)
-        console.log(target.className);
-      }
-    })
-
-  }
-  setInterval(() => {
-    selectImg();
-  }, 4000);
-})();
+const headerBtn = document.querySelector(".header__selectImgBtns");
+const picImgBtns = document.querySelectorAll(".selectImgBtn");
 
 //==================Nav
 
@@ -138,7 +101,68 @@ const onResCategori = (tag) => {
 };
 
 //==================header
+headerChangeImg = (() => {
+  const [...arr] = headerTxtWrap;
 
+  let i = 0;
+  selectImg();
+  function selectImg() {
+    if (i >= arr.length - 1) {
+      i = 0;
+    } else {
+      i++;
+    }
+    moveTxt();
+    const delClass = headerImgcContain.classList.item(1);
+    headerImgcContain.classList.remove(delClass);
+    headerImgcContain.classList.add(`bg${i + Number(1)}`);
+  }
+
+  function moveTxt() {
+    headerTxtWrap.forEach((e) => e.classList.remove("flex"));
+    headerTxtWrap[i].classList.add("flex");
+
+    typograpyWrap.forEach((target) => {
+      target.classList.remove("ontext");
+
+      if (typograpy[i] === target.parentElement) {
+        // target.classList.add("ontext");
+        // target.classList.add("ontext");
+        console.log(i);
+        activebtn();
+        setTimeout(() => {
+          target.classList.add("ontext");
+          activebtn();
+        }, 500);
+      }
+    });
+  }
+
+  let [...btn] = picImgBtns;
+  btn.forEach((arr) => {
+    arr.addEventListener("click", (e) => {
+      e.preventDefault();
+      i = Number(btn.indexOf(arr) - 1);
+      selectImg();
+      activebtn();
+      setTimeout(() => {
+        console.log("delay");
+      }, 200);
+    });
+  });
+
+  function activebtn(params) {
+    picImgBtns.forEach((e) => {
+      e.classList.remove("active");
+    });
+    picImgBtns[i].classList.add("active");
+    console.log(picImgBtns[i]);
+  }
+
+  setInterval(() => {
+    selectImg();
+  }, 4500);
+})();
 //==================Ticker
 
 function runOverTicker(event, type) {
